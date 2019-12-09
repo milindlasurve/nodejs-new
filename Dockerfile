@@ -9,7 +9,7 @@ MAINTAINER  Author Name akshay@cateina.com
 RUN rm -rf /ICICI_Server
 WORKDIR "/ICICI_Server"
 # Install npm production packages
-COPY package.json /ICICI_Server/
+COPY ICICI_Server/package.json /ICICI_Server/
 RUN cd /ICICI_Server
 RUN npm install
 COPY ICICI-Server/ /ICICI_Server
