@@ -1,0 +1,78 @@
+---
+swagger: "2.0"
+info:
+  x-ibm-name: "icicibank"
+  title: "ICICI_API_Two"
+  version: "1.0.0"
+schemes:
+- "https"
+host: "$(catalog.host)"
+basePath: "/icicibank"
+produces:
+- "application/json"
+securityDefinitions:
+  X-IBM-Client-Secret:
+    type: "apiKey"
+    description: ""
+    in: "header"
+    name: "X-IBM-Client-Secret"
+  clientIdHeader:
+    type: "apiKey"
+    in: "header"
+    name: "X-IBM-Client-Id"
+security:
+- clientIdHeader: []
+  X-IBM-Client-Secret: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+    - invoke:
+        target-url: "http://192.168.5.139:7080/ICICI_File_Generation"
+        verb: "POST"
+        cache-response: "protocol"
+  phase: "realized"
+paths:
+  /test/all:
+    post:
+      responses:
+        200:
+          description: "200 OK"
+          schema:
+            $ref: "#/definitions/Response"
+      parameters:
+      - name: "Req_body"
+        required: false
+        in: "body"
+        schema:
+          type: "object"
+definitions:
+  Request:
+    description: ''
+    type: object
+    properties:
+     RequestBody:
+        type: object
+        properties:
+             filetwo:
+               type: object
+  Response:
+    description: ""
+    type: "object"
+    properties:
+      RspBody:
+        type: "object"
+        properties:
+              testthree:
+                type: "string"
+              testfour:
+                type: "string"
+    example: "{\n   \n   \"ResponseBody\":{\n       \"testthree\": \"\"
+      \n        \"testfour\": \"\"\n\
+      \   }\n   \n}"
+tags: []
+consumes:
+- "application/x-www-form-urlencoded"

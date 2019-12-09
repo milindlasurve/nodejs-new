@@ -1,0 +1,157 @@
+swagger: '2.0'
+info:
+  title: Cigna TTK (Receipt)
+  description: iSurePay-Real time cheque and cash collection two level validation at Client and Bank’s end.
+  termsOfService: 'http://TBD'
+  contact:
+    name: CignaTTK Health Insurance Co Ltd.
+    email: treasury.india@cignattk.in
+    x-mis-contact-email: 
+      - reemapatankar@cignattk.in
+    url: 'http://TBD'
+  license:
+    name: TBD
+    url: 'http://TBD'
+  version: 1.0.0
+host: '104.236.97.62'
+basePath: '/api'
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /receipts:
+    post:
+      tags: 
+        - Receipt
+      summary: Acknowledgment on acceptance of payment transaction.
+      description: Acknowledgment sent to the client that the payment transaction was processed.
+      operationId: opReceipt
+      parameters:
+        - description: Receipt Request
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/receiptRequest'
+      responses:
+        '200':
+          description: Receipt Response.
+          schema:
+            $ref: '#/definitions/receiptResponse'
+definitions:
+  receiptRequest:
+    properties:
+      UserId:
+        type: string
+        description: API User ID.
+        minLength: 0
+        maxLength: 10
+      UserPwd:
+        type: string
+        description: API Password.
+        minLength: 0
+        maxLength: 15
+      Client_Code:
+        type: string
+        description: Unique Client/CMS Code provided by the Bank.
+        minLength: 0
+        maxLength: 8
+        pattern: '[A-Za-z]'
+      Client_Validate_No1:
+        type: string
+        description: Unique reference for primary validation. Examples are Policy Number / Loan Account Number/ Agent Code.
+        minLength: 0
+        maxLength: 20
+      Amount:
+        type: string
+        description: Collection / Transaction Amount. No decimals allowed. Max Length 13 digits.
+        minLength: 0
+        maxLength: 13
+      Transaction_Date:
+        type: string
+        pattern: '^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$'
+        description: Date of the transaction. Format DD-MM-YYYY 
+        minLength: 10
+        maxLength: 10
+      IBANK_Transaction_Id:
+        type: string
+        description: Unique ID generated for the transaction by ibank.
+        minLength: 0
+        maxLength: 15
+      Pay_Mode:
+        type: string
+        description: Payment Mode. “C” Cash, “F”  - Funds Transfer iBank Cheques / Debit Authorisation , iBank DD. “L” – Non iBank Cheques / DD
+        enum:
+        - C
+        - F
+        - L
+      "I-Sure_ID": 
+        type: string
+        description: Unique 10 digit ID generated for the transaction by bank. To be used for reconciliation. This number is available as Slip Number for non-iBank instruments and available in the clearing report.
+        minLength: 0
+        maxLength: 10
+      Instrument_Number: 
+        type: string
+        description:  6-digit number as available on the MICR bank on the instrument. The said tag will not be available for cash transaction.
+        minLength: 0
+        maxLength: 10
+      Branch_Name:
+        type: string
+        description: Bank Branch Name associated with the MICR Code. The said tag will not be available for cash transactions.
+        minLength: 0
+        maxLength: 50
+      Instrument_Date:
+        type: string
+        description: Date mentioned on the instrument (DD-MM-YYYY). The said tag will not be available for cash transaction.
+        pattern: '^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$'
+        minLength: 10
+        maxLength: 10
+      Bank_Name:
+        type: string
+        description: Bank Name associated with the MICR Code. The said tag will not be available for cash transactions.
+        minLength: 0
+        maxLength: 25
+      MICR_CODE:
+        type: string
+        description: MICR code as available on the non-iBank instrument deposited. The said tag will not be available for cash transaction.
+        minLength: 9
+        maxLength: 18
+    required:
+      - UserId
+      - UserPwd
+      - Client_Code
+      - Client_Validate_No1
+      - Amount
+      - Transaction_Date
+      - Pay_Mode
+  receiptResponse:
+    properties:
+      Client_Code:
+        type: string
+        description: Unique Client/CMS Code provided by the Bank.
+        minLength: 0
+        maxLength: 8
+        pattern: '[A-Za-z]'
+      Client_Validate_No1:
+        type: string
+        description: Unique reference for primary validation. Examples are Policy Number / Loan Account Number/ Agent Code.
+        minLength: 0
+        maxLength: 20
+      Status:
+        type: string
+        description: Accept / Reject.
+        enum:
+        - Accept
+        - Reject
+      Reject_Reason:
+        type: string
+        description: Rejection reason. Mandatory if the Status received is "Reject".  
+        minLength: 0
+        maxLength: 35
+    required:
+      - UserId
+      - UserPwd
+      - Status
+      - Reject_Reason

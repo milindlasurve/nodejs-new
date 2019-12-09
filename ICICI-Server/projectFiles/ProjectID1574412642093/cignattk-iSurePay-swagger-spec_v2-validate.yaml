@@ -1,0 +1,106 @@
+swagger: '2.0'
+info:
+  title: Cigna TTK (Validation)
+  description: iSurePay-Real time cheque and cash collection two level validation at Client and Bank’s end. 
+  termsOfService: 'http://TBD'
+  contact:
+    name: CignaTTK Health Insurance Co Ltd.
+    email: treasury.india@cignattk.in
+    x-mis-contact-email: 
+      - reemapatankar@cignattk.in
+    url: 'http://TBD'
+  license:
+    name: TBD
+    url: 'http://TBD'
+  version: 1.0.0
+host: '104.236.97.62'
+basePath: '/api'
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /validate_payments:
+    post:
+      tags: 
+        - Validation
+      summary: Validates a Payment Transaction.
+      description: Validate a payment transaction.
+      operationId: opValidate
+      parameters:
+        - description: Validation Request
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/validateRequest'
+      responses:
+        '200':
+          description: Validation Response.
+          schema:
+            $ref: '#/definitions/validateResponse'
+definitions:
+  validateRequest:
+    properties:
+      UserId:
+        type: string
+        description: API User ID.
+        minLength: 0
+        maxLength: 10
+      UserPwd:
+        type: string
+        description: API Password.
+        minLength: 0
+        maxLength: 15
+      Client_Code:
+        type: string
+        description: Unique Client/CMS Code provided by the Bank.
+        minLength: 0
+        maxLength: 8
+        pattern: '[A-Za-z]'
+      Client_Validate_No1:
+        type: string
+        description: Unique reference for primary validation. Examples are Policy Number / Loan Account Number/ Agent Code.
+        minLength: 0
+        maxLength: 15
+    required:
+      - UserId
+      - UserPwd
+      - Client_Code
+      - Client_Validate_No1
+  validateResponse:
+    properties:
+      Client_Code:
+        type: string
+        description: Unique Client/CMS Code provided by the Bank.
+        minLength: 0
+        maxLength: 8
+        pattern: '[A-Za-z]'
+      Client_Validate_No1:
+        type: string
+        description: Unique reference for primary validation. Examples are Policy Number / Loan Account Number/ Agent Code.
+        minLength: 0
+        maxLength: 20
+      Amount:
+        type: string
+        description: Collection / Transaction Amount. No decimals allowed. Max length 13 digits.
+        minLength: 0
+        maxLength: 13
+      Status:
+        type: string
+        description: Decision point for collection.
+        enum:
+        - Accept
+        - Reject
+      Reject_Reason:
+        type: string
+        description: Rejection reason. Mandatory if the Status received is "Reject".  
+        minLength: 0
+        maxLength: 35
+    required:
+      - Client_Code
+      - Client_Validate_No1
+      - Amount
+      - Status
+      - Reject_Reason

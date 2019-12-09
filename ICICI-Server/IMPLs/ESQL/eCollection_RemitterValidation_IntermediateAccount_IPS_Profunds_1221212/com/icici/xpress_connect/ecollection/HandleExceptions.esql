@@ -1,0 +1,91 @@
+BROKER SCHEMA com.icici.xpress_connect.ecollection
+
+
+CREATE COMPUTE MODULE HandleExceptions
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Declare references to the tree structures
+		DECLARE InputRootREF 		REFERENCE TO InputRoot;
+		DECLARE EnvironmentREF 		REFERENCE TO Environment;
+		DECLARE ExceptionListREF	REFERENCE TO InputExceptionList;
+		
+		CALL Format_Error_Message( InputRootREF, EnvironmentREF, ExceptionListREF );
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+	
+CREATE PROCEDURE Format_Error_Message( INOUT inputRootREF		REFERENCE,
+										  INOUT envREF				REFERENCE,
+										  INOUT expectionListREF	REFERENCE
+										) 
+BEGIN
+	
+	DECLARE ErrorText,ErrorTimestamp CHARACTER;
+
+	DECLARE Label 		CHARACTER;
+	DECLARE FlowName 	CHARACTER;
+	
+	DECLARE ErrorNum 	INTEGER;
+	DECLARE Place 		INTEGER;
+	DECLARE LastPlace 	INTEGER;
+	DECLARE I			INTEGER;
+	DECLARE C			INTEGER;
+	DECLARE X			INTEGER;
+	
+	SET I = 0;
+	SET envREF.TransactionRev_ERROR = NULL;
+
+	-- Set the start point
+	
+	DECLARE start REFERENCE TO expectionListREF.*[1];
+				
+	WHILE start.Number IS NOT NULL 
+	DO 
+		SET I = I + 1;
+		
+		SET ErrorNum = start.Number;
+		SET envREF.TransactionRev_ERROR.ERROR_DATA.ERROR_NUMBER[I] = ErrorNum;
+		
+				
+		SET C = CARDINALITY(start.Insert[]);
+		SET X = 1;
+		
+		IF C = 0 THEN
+			SET ErrorText = start.Text;
+			SET envREF.TransactionRev_ERROR.ERROR_DATA.ERROR_NUMBER[I].TEXT[X] = ErrorText;
+		ELSE
+			IF start.Text IS NOT NULL THEN
+				SET ErrorText = start.Text;
+				SET envREF.TransactionRev_ERROR.ERROR_DATA.ERROR_NUMBER[I].TEXT[X] = ErrorText;
+			END IF;
+				
+			WHILE X <= C DO
+				SET ErrorText = start.Insert[X].Text;
+				SET envREF.TransactionRev_ERROR.ERROR_DATA.ERROR_NUMBER[I].TEXT[X+1] = ErrorText;
+			
+				SET X = X + 1;
+			
+			END WHILE;		
+		END IF;
+		
+		-- Move start to the last child of the field to which it currently points 
+
+		MOVE start LASTCHILD;
+		
+	END WHILE;
+	
+END;
+END MODULE;

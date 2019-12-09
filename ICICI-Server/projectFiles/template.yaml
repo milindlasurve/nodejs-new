@@ -1,0 +1,98 @@
+swagger: '2.0'
+info:
+  title: ECollection
+  x-ibm-name: ecollection
+  version: 1.0.0
+host: $(catalog.host)
+schemes:
+  - https
+basePath: /ecollection
+produces:
+  - application/json
+consumes:
+  - application/json
+security:
+  - clientId: []
+    clientSecret: []
+securityDefinitions:
+  clientSecret:
+    type: apiKey
+    name: X-IBM-Client-Secret
+    in: header
+  clientId:
+    type: apiKey
+    name: X-IBM-Client-Id
+    in: header
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - invoke:
+          target-url: 'https://api-dev.lendbox.in/v1/bank/transaction'
+          verb: POST
+          username: jayan.unni@in.ibm.com
+          password: P@ssw0rd!
+    catch: []
+  phase: realized
+  gateway: datapower-gateway
+  type: rest
+  application-authentication:
+    certificate: false
+tags: []
+definitions:
+  ReqBody:
+    description: ''
+    type: object
+    properties:
+      Virtual Account Number Verification OUT:
+        type: array
+        items:
+          properties:
+            Client Code:
+              type: string
+            Virtual Account Number:
+              type: string
+            Transaction Amount:
+              type: number
+            UTR number:
+              type: string
+            Sender Name:
+              type: string
+            Date:
+              type: string
+            Sender IFSC_Code:
+              type: string
+            Remitter Account Number:
+              type: string
+            Mode:
+              type: string
+          type: object
+paths:
+  /transaction:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/RspBody'
+      parameters:
+        - name: REQUEST
+          required: false
+          in: body
+          schema:
+            $ref: '#/definitions/ReqBody'
+        - name: username
+          type: string
+          required: false
+          in: header
+        - name: password
+          type: string
+          required: false
+          in: header
+        - name: secret
+          type: string
+          required: false
+          in: header

@@ -1,0 +1,92 @@
+swagger: '2.0'
+info:
+  x-ibm-name: iciciAPI
+  title: newTest
+  version: v1
+  description: AllTest
+schemes:
+  - https
+host: api.test.in
+basePath: /customers
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientSecretHeader:
+    type: apiKey
+    description: Client secret generated on connect portal
+    in: header
+    name: X-IBM-Client-Secret
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+    description: Client ID generated on connect portal
+security:
+  - clientIdHeader: []
+    clientSecretHeader: []
+x-ibm-configuration:
+  testable: false
+  enforced: true
+  phase: realized
+paths:
+  /new/output:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/Response'
+        '401':
+          description: Unauthorized
+        '402':
+          description: Parameters where valid but request failed
+        '404':
+          description: Resource not found
+        '429':
+          description: Too many request
+        '503':
+          description: Service Unavailable
+      parameters:
+        - name: Request
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/Request'
+        - name: Authorization
+          type: string
+          required: true
+          in: header
+definitions:
+  Request:
+    description: ''
+    type: object
+    properties:
+      RequestBody:
+        type: object
+        properties:
+          result:
+            type: string
+          newall:
+            type: string
+  Response:
+    description: ''
+    type: object
+    properties:
+      ResponseBody:
+        type: object
+        properties:
+          output:
+            type: object
+            properties:
+              amount:
+                type: string
+    example:
+      ResponseBody:
+        amount: string
+tags: []
+x-ibm-endpoints:
+  - endpointUrl: 'https://api.test.in'
+    type:
+      - production

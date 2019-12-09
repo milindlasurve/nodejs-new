@@ -1,0 +1,90 @@
+swagger: '2.0'
+info:
+  title: Adani
+  description: Remitter Validation with Intermediary Account API (Verification only).
+  termsOfService: 'http://TBD'
+  contact:
+    name: Adani Hazira Port Pvt Ltd.
+    email: TBD@adani.com
+    x-mis-contact-email: 
+      - Himanshu.Shekhar@adani.com
+      - Shreeram.Moorthy@adani.com
+    url: 'http://TBD'
+  license:
+    name: TBD
+    url: 'http://TBD'
+  version: 1.0.0
+host: 'smartpay.adani.com'
+basePath: '/api'
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/validateUser:
+    post:
+      tags: 
+        - Verification
+      summary: Verifies a Payment Transaction.
+      description: Verifies a payment transaction.
+      operationId: opVerification
+      parameters:
+        - description: Verification Request
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/verificationRequest'
+      responses:
+        '200':
+          description: Verification Response.
+          schema:
+            $ref: '#/definitions/verificationResponse'
+definitions:
+  verificationRequest:
+    properties:
+      vid:
+        type: string
+        description: Unique actual Virtual Account No. of client.
+        minLength: 0
+        maxLength: 30
+    type: object    
+    required:
+    - vid    
+  verificationResponse:
+    properties:
+      status:
+        type: string
+        description: Decision point for collection.
+        enum:
+        - Success
+        - Error
+      message:
+        type: object
+        properties:  
+          success:
+            type: boolean
+            description: Status of the request.
+          message:
+            type: object
+            properties: 
+              userName:
+                type: string
+                description: User Name.
+                minLength: 0
+                maxLength: 35
+              validUser:
+                type: string
+                description: Is the user valid ?
+                enum:
+                - yes
+                - no
+              msg:
+                type: string
+                description: Mandatory if the status is FAIL.
+                minLength: 0
+                maxLength: 50
+    type: object
+    required: 
+    - status 

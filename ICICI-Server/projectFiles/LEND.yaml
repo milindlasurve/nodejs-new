@@ -1,0 +1,138 @@
+swagger: '2.0'
+info:
+  title: Lend
+  x-ibm-name: Lend
+  version: 1.0.0
+host: $(catalog.host)
+schemes:
+  - https
+basePath: /ecollection
+produces:
+  - application/json
+consumes:
+  - application/json
+security:
+  - clientId: []
+    clientSecret: []
+securityDefinitions:
+  clientSecret:
+    type: apiKey
+    name: X-IBM-Client-Secret
+    in: header
+  clientId:
+    type: apiKey
+    name: X-IBM-Client-Id
+    in: header
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - set-variable:
+          version: 1.0.0
+          title: set-variable
+          actions:
+            - set: message.status.code
+              value: 200
+            - set: message.body
+              value: >-
+                {"Virtual Account Number Verification OUT":[{"Client
+                Code":"LEND","Virtual Account
+                Number":"LEND0101910000000001","Transaction Amount":100000,"UTR
+                number":"HDFC111115935","Sender Name":"Test Remitter
+                1","Date":"10/04/2019","Sender
+                IFSC_Code":"HDFC0000015","Remitter Account
+                Number":"01431050032611","Mode":"N","Status":"ACCEPT","Reject
+                Reason":""}]}
+            - set: message.headers.content-type
+              value: application/json
+  properties:
+    target-url:
+      value: 'http://example.com/operation-name'
+      description: The URL of the target service
+      encoded: false
+paths:
+  /transaction:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/RspBody'
+        '401':
+          description: Unauthorized
+        '402':
+          description: Parameters where valid but request failed
+        '404':
+          description: Resource not found
+        '429':
+          description: Too many request
+        '503':
+          description: Service Unavailable
+      parameters:
+        - name: body
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/ReqBody'
+definitions:
+  ReqBody:
+    description: ''
+    type: object
+    properties:
+      Virtual Account Number Verification IN:
+        items:
+          properties:
+            Client Code:
+              type: string
+            Virtual Account Number:
+              type: string
+            Transaction Amount:
+              type: number
+            UTR number:
+              type: string
+            Sender Name:
+              type: string
+            Date:
+              type: string
+            Sender IFSC_Code:
+              type: string
+            Remitter Account Number:
+              type: string
+            Mode:
+              type: string
+            sender to receiver information:
+              type: string
+         
+  RspBody:
+    description: ''
+    type: object
+    properties:
+      Virtual Account Number Verification OUT:
+        items:
+          properties:
+            Client Code:
+              type: string
+            Virtual Account Number:
+              type: string
+            Transaction Amount:
+              type: number
+            UTR number:
+              type: string
+            Sender Name:
+              type: string
+            Date:
+              type: string
+            Sender IFSC_Code:
+              type: string
+            Remitter Account Number:
+              type: string
+            Mode:
+              type: string
+            Status:
+              type: string
+            Reject Reason:
+              type: string
+          

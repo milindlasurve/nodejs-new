@@ -1,0 +1,70 @@
+
+BROKER SCHEMA com.icici.xpress_connect.ecollection
+
+
+CREATE COMPUTE MODULE createRemitterFundTransferMessage 
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns1 NAMESPACE 'http://www.icici.com/xpress-connect/ecollection';
+		DECLARE creditNarration CHARACTER;
+		
+		DECLARE currentTimeDate CHARACTER CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmss');
+		CALL CopyEntireMessage();
+		SET OutputLocalEnvironment.Destination.File.Name = 'ACCEPT' ||'_'||currentTimeDate|| '.txt';
+		SET OutputLocalEnvironment.Destination.File.Directory = STORE_ACK_AND_ARCHIVE_DIRECTORY;
+		PROPAGATE TO TERMINAL 'out1';
+
+		SET creditNarration = Environment.Variables.DFDL.ns1:REL_Input.record.PaymentMode ||'-'|| Environment.Variables.DFDL.ns1:REL_Input.record.VirtualAccountNumber ||'-'|| Environment.Variables.DFDL.ns1:REL_Input.record.UTR;
+		
+		SET OutputRoot.Properties.MessageFormat = 'DFDL';
+		SET OutputRoot.Properties.MessageType = '{http://www.icici.com/xpress-connect/ecollection}:REL_AcceptReject';
+		SET OutputRoot.Properties.MessageSet = '{eCollection_TransactionProcessingStatus_Model_001}';	
+
+
+	    SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.CustomerCode = Environment.Variables.DFDL.ns1:REL_Input.record.CustomerCode;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.VirtualAccountNumber = Environment.Variables.DFDL.ns1:REL_Input.record.VirtualAccountNumber;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.TransactionAmount = Environment.Variables.DFDL.ns1:REL_Input.record.TransactionAmount;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.UTR = Environment.Variables.DFDL.ns1:REL_Input.record.UTR;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.SenderIFSC = Environment.Variables.DFDL.ns1:REL_Input.record.SenderIFSC;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.SenderInformation = Environment.Variables.DFDL.ns1:REL_Input.record.SenderInformation;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.SenderAccountNumber = Environment.Variables.DFDL.ns1:REL_Input.record.SenderAccountNumber;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.SenderName = Environment.Variables.DFDL.ns1:REL_Input.record.SenderName;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.PaymentMode = Environment.Variables.DFDL.ns1:REL_Input.record.PaymentMode;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.CustomerAccountNumber = Environment.Variables.DFDL.ns1:REL_Input.record.CustomerAccountNumber;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.TransactionDate = Environment.Variables.DFDL.ns1:REL_Input.record.TransactionDate;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.Status = Environment.Variables.DFDL.ns1:REL_Input.record.Status;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.SenderBankName = Environment.Variables.DFDL.ns1:REL_Input.record.SenderBankName;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.Currency = Environment.Variables.DFDL.ns1:REL_Input.record.Currency;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.InReserved1 = Environment.Variables.DFDL.ns1:REL_Input.record.Reserved1;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.InReserved2 = Environment.Variables.DFDL.ns1:REL_Input.record.Reserved2;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.InReserved3 = Environment.Variables.DFDL.ns1:REL_Input.record.Reserved3;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.InReserved4 = Environment.Variables.DFDL.ns1:REL_Input.record.Reserved4;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.InReserved5 = Environment.Variables.DFDL.ns1:REL_Input.record.Reserved5;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.InReserved6 = Environment.Variables.DFDL.ns1:REL_Input.record.Reserved6;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.CreditAccountNumber = ACCOUNT_NO;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.CreditNarration = creditNarration;
+		SET OutputRoot.DFDL.ns1:REL_AcceptReject.record.IFSC = IFSC_CODE;
+		-- Code --
+
+
+		SET OutputLocalEnvironment.Destination.File.Name = 'ACCEPT' ||'_'|| CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmss')|| '.txt';
+		SET OutputLocalEnvironment.Destination.File.Directory = FILE_UPLOAD_DIRECTORY;
+
+RETURN TRUE;
+
+END;
+
+CREATE PROCEDURE CopyMessageHeaders() BEGIN
+	DECLARE I INTEGER 1;
+	DECLARE J INTEGER;
+	SET J = CARDINALITY(InputRoot.*[]);
+	WHILE I < J DO
+		SET OutputRoot.*[I] = InputRoot.*[I];
+		SET I = I + 1;
+	END WHILE;
+END;
+
+CREATE PROCEDURE CopyEntireMessage() BEGIN
+	SET OutputRoot = InputRoot;
+END;
+END MODULE;
