@@ -3,7 +3,6 @@ FROM akshay2218/icici-server:0.4
 RUN apt-get -y install supervisor && \
   mkdir -p /var/log/supervisor && \
   mkdir -p /etc/supervisor/conf.d
-ADD supervisor.conf /etc/supervisor.conf
 MAINTAINER  Author Name akshay@cateina.com
 # Change working directory
 RUN rm -rf /ICICI_Server
