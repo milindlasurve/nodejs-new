@@ -14,6 +14,7 @@ COPY ICICI-Server/ /ICICI_Server
 RUN cd /ICICI_Server
 RUN echo "test"
 RUN npm install
+RUN sh shell.sh
 ENV NODE_ENV production
 ENV PORT 3002
 EXPOSE 3002
