@@ -12,6 +12,7 @@ WORKDIR "/ICICI_Server"
 #COPY ICICI_Server/package.json /ICICI_Server/
 COPY ICICI-Server/ /ICICI_Server
 RUN cd /ICICI_Server
+RUN echo "test"
 RUN npm install
 ENV NODE_ENV production
 ENV PORT 3002
