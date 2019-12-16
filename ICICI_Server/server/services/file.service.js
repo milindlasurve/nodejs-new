@@ -743,8 +743,8 @@ function jenkinScriptPush(data) {
     productName = data.whichProduct;
     var txnReversal = data.txnReversal.toUpperCase();
     var filePath = "";
-    var data = "product_name=" + data.productName + "\nservice_name=" + data.serviceName + "\nprofunds_client_code=" + data.clientCode + "\nips_client_code=" + data.IPSClientCode + "\nprojectId=" + data.projectId + "\ntransaction_reversal=" + txnReversal + "\ndeployment_environment=SIT" ;
-
+    var jenkinFiledata = "product_name=" + data.productName + "\nservice_name=" + data.serviceName + "\nprofunds_client_code=" + data.clientCode + "\nips_client_code=" + data.IPSClientCode + "\nprojectId=" + data.projectId + "\ntransaction_reversal=" + txnReversal + "\ndeployment_environment=SIT" ;
+    console.log("finally jenkins file data ",jenkinFiledata)
     //first pull repo
     //shellscrip
     if (productName === "eCollection") {
@@ -766,10 +766,10 @@ function jenkinScriptPush(data) {
     fs.readFile(filePath, function (error, fileData) {
         if (error) { deferred.reject({ message: "error to read jenkin file", error: error }) }
 
-        fileData = data;
+        fileData = jenkinFiledata;
 
         //modify the text file
-        fs.writeFile(filePath, data, 'utf8', function (err) {
+        fs.writeFile(filePath, jenkinFiledata, 'utf8', function (err) {
             if (err) { deferred.reject({ message: "failed to write file.", err: err }) }
 
             //shellscrip
