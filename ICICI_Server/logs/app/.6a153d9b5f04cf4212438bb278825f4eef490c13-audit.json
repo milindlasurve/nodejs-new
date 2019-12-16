@@ -1,0 +1,19 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "/Users/electrnicsbazaar/Documents/Cateina/devlopment/ICICI/UAT/ICICI_server_new/ICICI_Server/logs/app/.6a153d9b5f04cf4212438bb278825f4eef490c13-audit.json",
+    "files": [
+        {
+            "date": 1576416317675,
+            "name": "/Users/electrnicsbazaar/Documents/Cateina/devlopment/ICICI/UAT/ICICI_server_new/ICICI_Server/logs/app/app.log.2019-12-15",
+            "hash": "fdf0ce32c5c7233231233a0cc2f9cd4e"
+        },
+        {
+            "date": 1576476766961,
+            "name": "/Users/electrnicsbazaar/Documents/Cateina/devlopment/ICICI/UAT/ICICI_server_new/ICICI_Server/logs/app/app.log.2019-12-16",
+            "hash": "1588b6c2d00d032727ecb8045018c5f5"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/logs/app/.1dd3d264a50da50d0f11d605b26f8ab29e501cef-audit.json",
+    "files": [
+        {
+            "date": 1576067045075,
+            "name": "/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/logs/app/app.log.2019-12-11",
+            "hash": "e0fd774a23a46448b9c3ac549d260756"
+        }
+    ]
+}

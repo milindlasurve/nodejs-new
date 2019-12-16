@@ -1,0 +1,19 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "/home/carbon/Cateina/develpoment/ICICI/ICICI_server_new/ICICI_Server/logs/error/.54b81d39b8dc43dbbaba3db45ab2a7e04969fb85-audit.json",
+    "files": [
+        {
+            "date": 1576168758450,
+            "name": "/home/carbon/Cateina/develpoment/ICICI/ICICI_server_new/ICICI_Server/logs/error/error.log.2019-12-12",
+            "hash": "32fca9a77b0efc896968f54f701eaa7f"
+        },
+        {
+            "date": 1576175448512,
+            "name": "/home/carbon/Cateina/develpoment/ICICI/ICICI_server_new/ICICI_Server/logs/error/error.log.2019-12-13",
+            "hash": "6743f9c6806d8f39f35006ad313df75d"
+        }
+    ]
+}

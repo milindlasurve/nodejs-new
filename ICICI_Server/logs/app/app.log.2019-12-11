@@ -1,0 +1,78 @@
+error: [31muncaughtException: failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017[39m
+[31m    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {[39m
+[31m  name: 'MongoError',[39m
+[31m  message: 'connect ECONNREFUSED 218.93.250.18:27017'[39m
+[31m}][39m
+[31mMongoError: failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017[39m
+[31m    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {[39m
+[31m  name: 'MongoError',[39m
+[31m  message: 'connect ECONNREFUSED 218.93.250.18:27017'[39m
+[31m}][39m
+[31m    at Pool.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/topologies/server.js:336:35)[39m
+[31m    at Pool.emit (events.js:210:5)[39m
+[31m    at Connection.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/pool.js:280:12)[39m
+[31m    at Object.onceWrapper (events.js:300:26)[39m
+[31m    at Connection.emit (events.js:210:5)[39m
+[31m    at Socket.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/connection.js:189:49)[39m
+[31m    at Object.onceWrapper (events.js:300:26)[39m
+[31m    at Socket.emit (events.js:210:5)[39m
+[31m    at emitErrorNT (internal/streams/destroy.js:92:8)[39m
+[31m    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)[39m
+[31m    at processTicksAndRejections (internal/process/task_queues.js:80:21)[39m {"error":{"name":"MongoError","message":"failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {\n  name: 'MongoError',\n  message: 'connect ECONNREFUSED 218.93.250.18:27017'\n}]"},"stack":"MongoError: failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {\n  name: 'MongoError',\n  message: 'connect ECONNREFUSED 218.93.250.18:27017'\n}]\n    at Pool.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/topologies/server.js:336:35)\n    at Pool.emit (events.js:210:5)\n    at Connection.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/pool.js:280:12)\n    at Object.onceWrapper (events.js:300:26)\n    at Connection.emit (events.js:210:5)\n    at Socket.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/connection.js:189:49)\n    at Object.onceWrapper (events.js:300:26)\n    at Socket.emit (events.js:210:5)\n    at emitErrorNT (internal/streams/destroy.js:92:8)\n    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)","exception":true,"date":"Wed Dec 11 2019 17:54:05 GMT+0530 (India Standard Time)","process":{"pid":1252,"uid":501,"gid":20,"cwd":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server","execPath":"/usr/local/bin/node","version":"v12.13.0","argv":["/usr/local/bin/node","/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/server/server.js"],"memoryUsage":{"rss":88436736,"heapTotal":61132800,"heapUsed":39301024,"external":20742586}},"os":{"loadavg":[2.2109375,1.65234375,1.49560546875],"uptime":26896},"trace":[{"column":14,"file":"net.js","function":"TCPConnectWrap.afterConnect [as oncomplete]","line":1128,"method":"afterConnect [as oncomplete]","native":false},{"column":35,"file":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/topologies/server.js","function":null,"line":336,"method":null,"native":false},{"column":5,"file":"events.js","function":"Pool.emit","line":210,"method":"emit","native":false},{"column":12,"file":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/pool.js","function":null,"line":280,"method":null,"native":false},{"column":26,"file":"events.js","function":"Object.onceWrapper","line":300,"method":"onceWrapper","native":false},{"column":5,"file":"events.js","function":"Connection.emit","line":210,"method":"emit","native":false},{"column":49,"file":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/connection.js","function":null,"line":189,"method":null,"native":false},{"column":26,"file":"events.js","function":"Object.onceWrapper","line":300,"method":"onceWrapper","native":false},{"column":5,"file":"events.js","function":"Socket.emit","line":210,"method":"emit","native":false},{"column":8,"file":"internal/streams/destroy.js","function":"emitErrorNT","line":92,"method":null,"native":false},{"column":3,"file":"internal/streams/destroy.js","function":"emitErrorAndCloseNT","line":60,"method":null,"native":false},{"column":21,"file":"internal/process/task_queues.js","function":"processTicksAndRejections","line":80,"method":null,"native":false}]}
+error: [31muncaughtException: failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017[39m
+[31m    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {[39m
+[31m  name: 'MongoError',[39m
+[31m  message: 'connect ECONNREFUSED 218.93.250.18:27017'[39m
+[31m}][39m
+[31mMongoError: failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017[39m
+[31m    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {[39m
+[31m  name: 'MongoError',[39m
+[31m  message: 'connect ECONNREFUSED 218.93.250.18:27017'[39m
+[31m}][39m
+[31m    at Pool.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/topologies/server.js:336:35)[39m
+[31m    at Pool.emit (events.js:210:5)[39m
+[31m    at Connection.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/pool.js:280:12)[39m
+[31m    at Object.onceWrapper (events.js:300:26)[39m
+[31m    at Connection.emit (events.js:210:5)[39m
+[31m    at Socket.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/connection.js:189:49)[39m
+[31m    at Object.onceWrapper (events.js:300:26)[39m
+[31m    at Socket.emit (events.js:210:5)[39m
+[31m    at emitErrorNT (internal/streams/destroy.js:92:8)[39m
+[31m    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)[39m
+[31m    at processTicksAndRejections (internal/process/task_queues.js:80:21)[39m {"error":{"name":"MongoError","message":"failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {\n  name: 'MongoError',\n  message: 'connect ECONNREFUSED 218.93.250.18:27017'\n}]"},"stack":"MongoError: failed to connect to server [icici-xpress-mongo:27017] on first connect [Error: connect ECONNREFUSED 218.93.250.18:27017\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1128:14) {\n  name: 'MongoError',\n  message: 'connect ECONNREFUSED 218.93.250.18:27017'\n}]\n    at Pool.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/topologies/server.js:336:35)\n    at Pool.emit (events.js:210:5)\n    at Connection.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/pool.js:280:12)\n    at Object.onceWrapper (events.js:300:26)\n    at Connection.emit (events.js:210:5)\n    at Socket.<anonymous> (/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/connection.js:189:49)\n    at Object.onceWrapper (events.js:300:26)\n    at Socket.emit (events.js:210:5)\n    at emitErrorNT (internal/streams/destroy.js:92:8)\n    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)\n    at processTicksAndRejections (internal/process/task_queues.js:80:21)","exception":true,"date":"Wed Dec 11 2019 17:54:11 GMT+0530 (India Standard Time)","process":{"pid":1266,"uid":501,"gid":20,"cwd":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server","execPath":"/usr/local/bin/node","version":"v12.13.0","argv":["/usr/local/bin/node","/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/server/server.js"],"memoryUsage":{"rss":93937664,"heapTotal":63492096,"heapUsed":38912592,"external":21311833}},"os":{"loadavg":[2.11376953125,1.64111328125,1.49267578125],"uptime":26902},"trace":[{"column":14,"file":"net.js","function":"TCPConnectWrap.afterConnect [as oncomplete]","line":1128,"method":"afterConnect [as oncomplete]","native":false},{"column":35,"file":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/topologies/server.js","function":null,"line":336,"method":null,"native":false},{"column":5,"file":"events.js","function":"Pool.emit","line":210,"method":"emit","native":false},{"column":12,"file":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/pool.js","function":null,"line":280,"method":null,"native":false},{"column":26,"file":"events.js","function":"Object.onceWrapper","line":300,"method":"onceWrapper","native":false},{"column":5,"file":"events.js","function":"Connection.emit","line":210,"method":"emit","native":false},{"column":49,"file":"/Users/electrnicsbazaar/Documents/Cateina-1/ICICI/ICICI_Server/node_modules/mongodb-core/lib/connection/connection.js","function":null,"line":189,"method":null,"native":false},{"column":26,"file":"events.js","function":"Object.onceWrapper","line":300,"method":"onceWrapper","native":false},{"column":5,"file":"events.js","function":"Socket.emit","line":210,"method":"emit","native":false},{"column":8,"file":"internal/streams/destroy.js","function":"emitErrorNT","line":92,"method":null,"native":false},{"column":3,"file":"internal/streams/destroy.js","function":"emitErrorAndCloseNT","line":60,"method":null,"native":false},{"column":21,"file":"internal/process/task_queues.js","function":"processTicksAndRejections","line":80,"method":null,"native":false}]}
+info: [32m::1 - - [11/Dec/2019:12:27:19 +0000] "GET /api-docs/v0.1/ HTTP/1.1" 200 3253 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:19 +0000] "GET /api-docs/v0.1/swagger-ui.css HTTP/1.1" 200 154488 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:19 +0000] "GET /api-docs/v0.1/swagger-ui-init.js HTTP/1.1" 200 100996 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:19 +0000] "GET /api-docs/v0.1/swagger-ui-standalone-preset.js HTTP/1.1" 200 440850 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:19 +0000] "GET /api-docs/v0.1/swagger-ui-bundle.js HTTP/1.1" 200 1448844 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:20 +0000] "GET /api-docs/v0.1/favicon-32x32.png HTTP/1.1" 200 1141 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:20 +0000] "GET /api-docs/v0.1/favicon-16x16.png HTTP/1.1" 200 445 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:20 +0000] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 171 "-" "Safari/15608.3.10.1.4 CFNetwork/1120 Darwin/19.0.0 (x86_64)"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:27:20 +0000] "GET /apple-touch-icon.png HTTP/1.1" 404 159 "-" "Safari/15608.3.10.1.4 CFNetwork/1120 Darwin/19.0.0 (x86_64)"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:35:08 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 1055 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:36:29 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 878 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:36:29 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 878 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:36:44 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 878 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:37:24 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 878 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:40:55 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 375 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:50:28 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 443 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:52:43 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 443 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m
+info: [32m::1 - - [11/Dec/2019:12:53:34 +0000] "POST /api/file/ui/yaml HTTP/1.1" 200 446 "http://localhost:3002/api-docs/v0.1/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"[39m
+[32m[39m

@@ -1,0 +1,347 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Bank Branch Locator.",
+    "version": "1.0.0",
+    "title": "Xpress Connect Bank Branch Locator.",
+    "termsOfService": "http://xpressconnect.icicibank.com/api/tos",
+    "contact": {
+      "name": "ICICI",
+      "url": "http://xpressconnect.icicibank.com/api/",
+      "email": "tbd@icicibank.co.in"
+    },
+    "license": {
+      "name": "TBD",
+      "url": "http://xpressconnect.icicibank.com/api/license"
+    }
+  },
+  "host": "localhost",
+  "basePath": "/api/branch-locator",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/branch": {
+      "get": {
+        "tags": [
+          "Branch Locator"
+        ],
+        "summary": "Locates a bank branch.",
+        "description": "Bank branch information is searched for using IFSC code, Postal Address, Coordinates, Radius.",
+        "operationId": "opLocateBranch",
+        "parameters": [
+          {
+            "name": "ifsc",
+            "in": "query",
+            "description": "IFSC code is a unique eleven-digit number which is a combination of alphabets and numerals. It is used to transfer funds online for NEFT, IMPS and RTGS transactions. Usually, the IFSC code can be found on the cheque-book provided by the bank. It can also be found on the front page of the account-holders passbook. The IFSC code of each bank branch is assigned by the Reserve Bank of India.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "postal-address",
+            "in": "query",
+            "description": "Address line (e.g. name of the street).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "pipes"
+          },
+          {
+            "name": "state-code",
+            "in": "query",
+            "description": "State code.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "postal-code",
+            "in": "query",
+            "description": "Postal code.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "country-code",
+            "in": "query",
+            "description": "Country code.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radius in metres.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bank branches that match the given search values.",
+            "schema": {
+              "$ref": "#/definitions/BranchList"
+            }
+          }
+        },
+        "x-swagger-router-controller": "BranchLocator"
+      },
+      "post": {
+        "tags": [
+          "Branch Locator"
+        ],
+        "summary": "Adds a new bank branch.",
+        "description": "Adds a new bank branch.",
+        "operationId": "opAddBranch",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New bank branch",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-swagger-router-controller": "BranchLocator"
+      }
+    }
+  },
+  "definitions": {
+    "BranchList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Branch"
+      }
+    },
+    "Branch": {
+      "type": "object",
+      "required": [
+        "branchId",
+        "ifsc",
+        "postal-address"
+      ],
+      "properties": {
+        "branchId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Branch Id."
+        },
+        "ifsc": {
+          "type": "string",
+          "example": "ICIC0000032",
+          "description": "IFSC code is a unique eleven-digit number which is a combination of alphabets and numerals. It is used to transfer funds online for NEFT, IMPS and RTGS transactions. Usually, the IFSC code can be found on the cheque-book provided by the bank. It can also be found on the front page of the account-holders passbook. The IFSC code of each bank branch is assigned by the Reserve Bank of India.",
+          "minLength": 11,
+          "maxLength": 11
+        },
+        "postal-address": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "coords": {
+          "$ref": "#/definitions/Branch_coords"
+        }
+      },
+      "example": {
+        "branchId": "0000323",
+        "ifsc": "ICIC0000323",
+        "postal-address": {
+          "addressId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "address-line": [
+            {
+              "seq-no": 1,
+              "addr-ln": "Trade World, B Wing, Kamla Mill Compound"
+            },
+            {
+              "seq-no": 2,
+              "addr-ln": "Senapati Bapat Marg"
+            }
+          ],
+          "csd": [
+            {
+              "csd-name": "Lower Parel",
+              "csd-type-cd": "suburb"
+            },
+            {
+              "csd-name": "Mumbai",
+              "csd-type-cd": "city"
+            },
+            {
+              "csd-cd": "MH",
+              "csd-name": "Maharashtra",
+              "csd-type-cd": "state"
+            }
+          ],
+          "postal-cd": "400013",
+          "country-cd": "IN"
+        },
+        "coords": {
+          "x-coord": 19.0124038,
+          "y-coord": 72.8258423
+        }
+      }
+    },
+    "PostalAddress": {
+      "type": "object",
+      "required": [
+        "address-line",
+        "addressId",
+        "country-cd",
+        "csd",
+        "postal-cd"
+      ],
+      "properties": {
+        "addressId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Postal address Id."
+        },
+        "address-line": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostalAddress_addressline"
+          }
+        },
+        "csd": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostalAddress_csd"
+          }
+        },
+        "postal-cd": {
+          "type": "string",
+          "example": "400001",
+          "description": "Postal code",
+          "pattern": "[0-9]{6}"
+        },
+        "country-cd": {
+          "type": "string",
+          "example": "IN",
+          "description": "ISO 3166-2 country code."
+        },
+        "contact-details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactDetails"
+          }
+        }
+      },
+      "example": {
+        "addressId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "address-line": [
+          {
+            "seq-no": 1,
+            "addr-ln": "TCG Financial Centre, C-53"
+          },
+          {
+            "seq-no": 2,
+            "addr-ln": "G Block, Bandra Kurla Complex"
+          }
+        ],
+        "csd": [
+          {
+            "csd-name": "Bandra (E)",
+            "csd-type-cd": "suburb"
+          },
+          {
+            "csd-name": "Mumbai",
+            "csd-type-cd": "city"
+          },
+          {
+            "csd-cd": "MH",
+            "csd-name": "Maharashtra",
+            "csd-type-cd": "state"
+          }
+        ],
+        "postal-cd": "400051",
+        "country-cd": "IN"
+      }
+    },
+    "Branch_coords": {
+      "type": "object",
+      "required": [
+        "x-coord",
+        "y-coord"
+      ],
+      "properties": {
+        "x-coord": {
+          "type": "number"
+        },
+        "y-coord": {
+          "type": "number"
+        }
+      }
+    },
+    "PostalAddress_addressline": {
+      "type": "object",
+      "required": [
+        "addr-ln"
+      ],
+      "properties": {
+        "seq-no": {
+          "type": "integer"
+        },
+        "addr-ln": {
+          "type": "string"
+        }
+      }
+    },
+    "PostalAddress_csd": {
+      "type": "object",
+      "required": [
+        "csd-name",
+        "csd-type-cd"
+      ],
+      "properties": {
+        "csd-cd": {
+          "type": "string",
+          "example": "MH"
+        },
+        "csd-name": {
+          "type": "string",
+          "example": "Maharashtra"
+        },
+        "csd-type-cd": {
+          "type": "string",
+          "example": "Mumbai",
+          "enum": [
+            "suburb",
+            "city",
+            "district",
+            "state"
+          ]
+        }
+      }
+    },
+    "ContactDetails": {
+      "type": "object",
+      "required": [
+        "contact-no"
+      ],
+      "properties": {
+        "contact-no": {
+          "type": "string",
+          "description": "Contact Number.",
+          "example": "+91-9810003010"
+        },
+        "contact-no-fmt": {
+          "type": "string",
+          "description": "Contact Number Format. Regular expression to parse the contact number.",
+          "example": "+[0-9]{2}-[0-9]{10}"
+        }
+      }
+    }
+  }
+}

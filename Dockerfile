@@ -9,8 +9,8 @@ RUN rm -rf /ICICI_Server
 WORKDIR "/ICICI_Server"
 # Install npm production packages
 #COPY ICICI_Server/package.json /ICICI_Server/
-ADD ICICI-Server/supervisor.conf /etc/supervisor.conf
-COPY ICICI-Server/ /ICICI_Server
+ADD ICICI_Server/supervisor.conf /etc/supervisor.conf
+COPY ICICI_Server/ /ICICI_Server
 RUN cd /ICICI_Server
 RUN echo "test"
 RUN npm install
